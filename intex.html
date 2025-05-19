@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario de Contacto | Grupo Fiancar</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="contenedor">
+    <img src="logo-fiancar.png" alt="Grupo Fiancar" class="logo">
+    
+    <h2>Formulario de Adelanto </h2>
+    <form id="miFormulario">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" required>
+
+      <label for="interno">Interno:</label>
+      <input type="text" id="interno" name="interno" required>
+
+      <label for="monto">Monto a solicitar:</label>
+      <textarea id="monto" name="monto" rows="4" required></textarea>
+
+      <button type="submit">Enviar</button>
+    </form>
+    <p id="mensaje"></p>
+  </div>
+
+  <script src="formulario.js"></script>
+</body>
+</html>
