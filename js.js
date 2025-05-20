@@ -1,9 +1,14 @@
-const form = new URLSearchParams(new FormData(document.getElementById('miFormulario')));
+function doPost(e) {
+  const ss = SpreadsheetApp.openById("1f2wvUgKnS1BgerCFwoeZc2QOn6BWGNtvIQYcWiayJZs");
+  const hoja = ss.getSheetByName("Adelantos"); // o el nombre correcto de la pestaña
 
-fetch(scriptURL, {https://script.google.com/u/0/home/projects/1tYJ9elFvWnE5_cVJ5qanrg-CLj6Ag27KS-dBapg2y2xXAVtSIj-u7zHI/edit
-  method: 'POST',
-  body: form,
-  headers: {
-    'Content-Type': 'application/x-www-form-urlencoded'
-  }
-});
+  hoja.appendRow([
+    new Date(),
+    e.parameter.nombre,
+    e.parameter.interno,
+    e.parameter.monto
+  ]);
+
+  return ContentService.createTextOutput("OK");
+}
+
