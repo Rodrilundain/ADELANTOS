@@ -21,27 +21,31 @@
 <p id="mensaje"></p>
 
 <script>
-  const scriptURL = 'AKfycbwVN0NTWGAn1cWVMKxk5E_sA6qF4ks18nuOyKKlRfU'; // PONÉ ACÁ TU URL DE DEPLOY DEL WEB APP
+  const zapierWebhookURL = 'https://hooks.zapier.com/hooks/catch/123456/abcdef/'; // ← PONÉ TU URL AQUÍ
 
   document.getElementById('miFormulario').addEventListener('submit', function(e) {
     e.preventDefault();
 
     const formData = new FormData(this);
-    const formBody = new URLSearchParams(formData);
+    const data = {};
 
-    fetch(scriptURL, {
+    formData.forEach((value, key) => {
+      data[key] = value;
+    });
+
+    fetch(zapierWebhookURL, {
       method: 'POST',
-      body: formBody,
+      body: JSON.stringify(data),
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/json'
       }
     })
-    .then(response => {
-      document.getElementById('mensaje').innerText = 'Formulario enviado con éxito.';
+    .then(res => {
+      document.getElementById('mensaje').innerText = 'Formulario enviado a Zapier con éxito.';
       this.reset();
     })
-    .catch(error => {
-      document.getElementById('mensaje').innerText = 'Error al enviar: ' + error.message;
+    .catch(err => {
+      document.getElementById('mensaje').innerText = 'Error al enviar: ' + err.message;
     });
   });
 </script>
