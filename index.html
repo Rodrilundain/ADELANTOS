@@ -21,7 +21,7 @@
 <p id="mensaje"></p>
 
 <script>
-  const zapierWebhookURL = 'https://zapier.com/editor/298713620/draft/298713621/setup'; // ← PONÉ TU URL AQUÍ
+  const makeWebhookURL = 'https://us2.make.com/73258/scenarios/add'; // ← PONÉ TU URL DE MAKE AQUÍ
 
   document.getElementById('miFormulario').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -33,7 +33,7 @@
       data[key] = value;
     });
 
-    fetch(zapierWebhookURL, {
+    fetch(makeWebhookURL, {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {
@@ -41,7 +41,7 @@
       }
     })
     .then(res => {
-      document.getElementById('mensaje').innerText = 'Formulario enviado a Zapier con éxito.';
+      document.getElementById('mensaje').innerText = 'Formulario enviado correctamente.';
       this.reset();
     })
     .catch(err => {
