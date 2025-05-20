@@ -11,34 +11,37 @@
     <img src="logo-fiancar.png" alt="Grupo Fiancar" class="logo">
 
   <h2>Formulario de Adelantos</h2>
-  <form id="formulario">
-    <label for="nombre">Nombre:</label>
-    <input type="text" id="nombre" name="nombre" required>
+<form id="miFormulario">
+  <input type="text" name="nombre" placeholder="Nombre" required>
+  <input type="text" name="interno" placeholder="Interno" required>
+  <input type="text" name="monto" placeholder="Monto" required>
+  <button type="submit">Enviar</button>
+</form>
 
-    <label for="interno">Interno:</label>
-    <input type="text" id="interno" name="interno" required>
+<p id="mensaje"></p>
 
-    <label for="monto">Monto:</label>
-    <textarea id="monto" name="monto" required></textarea>
+<script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfyc.../exec'; // PONÉ ACÁ TU URL DE DEPLOY DEL WEB APP
 
-    <button type="submit">Enviar</button>
-  </form>
+  document.getElementById('miFormulario').addEventListener('submit', function(e) {
+    e.preventDefault();
 
-  <p id="mensaje"></p>
+    const formData = new FormData(this);
+    const formBody = new URLSearchParams(formData);
 
-  <script>
-    const scriptURL = 'https://script.google.com/home/projects/1tYJ9elFvWnE5_cVJ5qanrg-CLj6Ag27KS-dBapg2y2xXAVtSIj-u7zHI/edit'; // la pondremos en el paso 3
-    const form = document.getElementById('formulario');
-
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      const formData = new FormData(form);
-      
-      fetch(scriptURL, { method: 'POST', body: formData })
-        .then(response => document.getElementById('mensaje').innerText = 'Formulario enviado con éxito.')
-        .catch(error => document.getElementById('mensaje').innerText = 'Hubo un error: ' + error.message);
+    fetch(scriptURL, {
+      method: 'POST',
+      body: formBody,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    })
+    .then(response => {
+      document.getElementById('mensaje').innerText = 'Formulario enviado con éxito.';
+      this.reset();
+    })
+    .catch(error => {
+      document.getElementById('mensaje').innerText = 'Error al enviar: ' + error.message;
     });
-  </script>
-
-</body>
-</html>
+  });
+</script>
